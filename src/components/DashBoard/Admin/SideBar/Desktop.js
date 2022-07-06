@@ -87,15 +87,15 @@ const Desktop = () => {
               <span>Subjects</span>
             </Nav>
           </MainNav> */}
-          <MainNav to="/routine">
+          {/* <MainNav to="/routine">
             <Nav>
               <IconHold>
                 <VscCompassActive />
               </IconHold>
               <span>Class Routine</span>
             </Nav>
-          </MainNav>
-          <MainNav to="/attendance">
+          </MainNav> */}
+          <MainNav to="/expenses">
             <Nav>
               <IconHold>
                 <HiPresentationChartBar />
@@ -103,14 +103,14 @@ const Desktop = () => {
               <span>Expenses</span>
             </Nav>
           </MainNav>
-          <MainNav to="/events">
+          {/* <MainNav to="/events">
             <Nav>
               <IconHold>
                 <BsCalendar2EventFill />
               </IconHold>
               <span>Events</span>
             </Nav>
-          </MainNav>
+          </MainNav> */}
           <MainNavOut>
             <Nav
               onClick={() => {

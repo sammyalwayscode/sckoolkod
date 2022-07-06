@@ -27,6 +27,11 @@ export const MainGlobal = ({ children }) => {
     setUpdateStudent(!updateStudent);
   };
 
+  const [expenseModal, setExpenseModal] = useState(false);
+  const addExpenseMod = () => {
+    setExpenseModal(!expenseModal);
+  };
+
   return (
     <GlobalState.Provider
       value={{
@@ -41,6 +46,8 @@ export const MainGlobal = ({ children }) => {
         editTeacherPrifileModal,
         updateStudent,
         updateStudentModal,
+        expenseModal,
+        addExpenseMod,
       }}
     >
       {children}
