@@ -56,7 +56,7 @@ const Subject = () => {
   const getSubjects = async () => {
     const mainURL = "";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/subject/${classID}/`;
+    const url = `${localURL}/api/subject/${classID}/class`;
 
     await axios.get(url).then((res) => {
       setSubjects(res.data.data.subject);

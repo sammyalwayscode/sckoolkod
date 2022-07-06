@@ -35,7 +35,7 @@ const AddStudentModal = () => {
     console.log(val);
     // const { expenseAmount, itemName, itemQuantity, sourcePurchase } = val;
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/student/register/${user._id}`;
+    const url = `${localURL}/api/student/register/${user.admin}/${user._id}`;
 
     await axios.post(url, val);
 
