@@ -10,12 +10,13 @@ import { VscCompassActive } from "react-icons/vsc";
 import { BsCalendar2EventFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FaPowerOff } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../ReduxGlobal/Global";
 
 const Desktop = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -93,11 +94,11 @@ const Desktop = () => {
               <span>My Profile</span>
             </Nav>
           </MainNav>
-          <MainNavOut to="">
+          <MainNavOut>
             <Nav
               onClick={() => {
                 dispatch(logOut());
-                //   // navigate("/home");
+                navigate("/");
               }}
             >
               <IconHold>

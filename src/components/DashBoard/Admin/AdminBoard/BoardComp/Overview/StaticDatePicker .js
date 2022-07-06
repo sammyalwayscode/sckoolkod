@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { DatePicker } from "@material-ui/pickers";
-
+import { alpha } from "@material-ui/core/styles";
 const StaticDatePicker = () => {
   const [date, changeDate] = useState(new Date());
 

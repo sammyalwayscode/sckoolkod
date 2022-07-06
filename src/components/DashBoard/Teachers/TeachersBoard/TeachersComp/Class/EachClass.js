@@ -59,7 +59,7 @@ const EachClass = () => {
   const getClasses = async () => {
     const mainURL = "";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/student/classStu/${classID}/`;
+    const url = `${localURL}/api/student/${classID}/students`;
 
     await axios.get(url).then((res) => {
       setClassStu(res.data.data.student);
