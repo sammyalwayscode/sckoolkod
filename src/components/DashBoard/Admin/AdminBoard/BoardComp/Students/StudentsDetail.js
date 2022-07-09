@@ -2,22 +2,18 @@ import axios from "axios";
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { GrDocumentUpdate, GrUpdate } from "react-icons/gr";
-import { useContext } from "react";
-import { GlobalState } from "../../../../../ContexGlobal/Global";
-import ProfileUpdate from "./ProfileUpdate";
+import { useParams } from "react-router-dom";
 
-const MyProfile = () => {
+const StudentsDetail = () => {
   const studentUser = useSelector((state) => state.user);
-  const { updateStudentModal } = useContext(GlobalState);
-  // const { id } = useParams();
+  const { id } = useParams();
 
   const [studentDetailGet, setStudentDetailGet] = React.useState({});
 
-  const getTeachers = async () => {
+  const getStudentDetail = async () => {
     const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${globalURL}/api/student/${studentUser._id}`;
+    const url = `${globalURL}/api/student/${id}`;
     console.log(studentUser._id);
 
     await axios.get(url).then((res) => {
@@ -27,17 +23,15 @@ const MyProfile = () => {
   };
 
   React.useEffect(() => {
-    getTeachers();
+    getStudentDetail();
     console.log(studentDetailGet);
   }, []);
 
   return (
     <>
-      <ProfileUpdate />
       <Container>
         <Wrapper>
           <h4>My Profile</h4>
-          <button onClick={updateStudentModal}> Update Profile</button>
           <DetailContainer>
             <DetailContainerWrapper>
               <h5>About Me</h5>
@@ -115,7 +109,7 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default StudentsDetail;
 
 const Container = styled.div`
   min-height: calc(100vh - 50px);
@@ -142,10 +136,6 @@ const Wrapper = styled.div`
   width: 1150px;
   @media (max-width: 1150px) {
     width: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   button {
@@ -178,9 +168,6 @@ const DetailContainerWrapper = styled.div`
 `;
 const DetailContainerHold = styled.div`
   display: flex;
-  @media (max-width: 700px) {
-    flex-direction: column;
-  }
 `;
 const DetailImageContainer = styled.div`
   height: 230px;
@@ -197,7 +184,7 @@ const DetailImageContainer = styled.div`
   }
 `;
 const DetailTextContainer = styled.div`
-  /* width: 600px; */
+  width: 600px;
   /* background-color: red; */
 `;
 const TeachersName = styled.div`

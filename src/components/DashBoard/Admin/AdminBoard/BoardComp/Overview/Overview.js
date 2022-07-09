@@ -9,6 +9,8 @@ import styled from "styled-components";
 import StaticDatePicker from "./StaticDatePicker ";
 import { SiSololearn } from "react-icons/si";
 import { useSelector } from "react-redux";
+import DoughnutChart from "./DoughnutChart";
+import AreaChart from "./AreaChart";
 
 const Overview = () => {
   const adminUser = useSelector((state) => state.user);
@@ -53,7 +55,7 @@ const Overview = () => {
               </IconHold>
               <TeacNum>
                 <Txt>Students</Txt>
-                <Num>15,000</Num>
+                <Num> {adminUser.students.length} </Num>
               </TeacNum>
             </BoxTwo>
             <BoxTwo>
@@ -62,7 +64,7 @@ const Overview = () => {
               </IconHold>
               <TeacNum>
                 <Txt>Teachers</Txt>
-                <Num>7,832</Num>
+                <Num>{adminUser.teacher.length}</Num>
               </TeacNum>
             </BoxTwo>
           </span>
@@ -73,7 +75,7 @@ const Overview = () => {
               </IconHold>
               <TeacNum>
                 <Txt>Parents</Txt>
-                <Num>15,000</Num>
+                <Num>{adminUser.students.length} </Num>
               </TeacNum>
             </BoxTwo>
             <BoxTwo>
@@ -88,11 +90,15 @@ const Overview = () => {
           </span>
         </RowTwo>
         <RowThree>
-          <ChartOne>
+          {/* <ChartOne>
             <StaticDatePicker />
-          </ChartOne>
-          <ChartTwo>Chart Two </ChartTwo>
-          <ChartThree>Chart Three</ChartThree>
+          </ChartOne> */}
+          <ChartTwo>
+            <DoughnutChart />
+          </ChartTwo>
+          <ChartThree>
+            <AreaChart />
+          </ChartThree>
         </RowThree>
       </Wrapper>
     </Container>
@@ -147,6 +153,7 @@ const Boxes = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 6px;
+  text-align: center;
 
   @media (max-width: 770px) {
     width: 90%;
@@ -196,7 +203,7 @@ const BoxTwo = styled.div`
   border-radius: 4px;
 
   @media (max-width: 500px) {
-    width: 90%;
+    width: 300px;
   }
 `;
 const IconHold = styled.div`
@@ -209,6 +216,7 @@ const IconHold = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 20px;
+  text-align: center;
 `;
 const TeacNum = styled.div`
   margin: 0 10px;
@@ -232,12 +240,21 @@ const ChartOne = styled.div`
 const ChartTwo = styled.div`
   width: 360px;
   height: 400px;
-  background-color: darkcyan;
+  background-color: #fff;
   margin: 10px 10px;
 `;
 const ChartThree = styled.div`
-  width: 360px;
+  /* width: 360px; */
+  flex: 1;
+  flex-wrap: wrap;
   height: 400px;
-  background-color: darkred;
+  background-color: #fff;
   margin: 10px 10px;
+  @media (max-width: 600px) {
+    display: flex;
+    width: 90%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+  }
 `;

@@ -27,8 +27,9 @@ const AddSubject = () => {
 
   const onSubmit = handleSubmit(async (val) => {
     console.log(val);
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/subject/${classID}`;
+    const url = `${globalURL}/api/subject/${classID}`;
 
     await axios.post(url, val);
 

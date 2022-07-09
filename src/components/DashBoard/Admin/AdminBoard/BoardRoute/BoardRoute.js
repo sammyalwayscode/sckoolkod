@@ -4,12 +4,14 @@ import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import Account from "../BoardComp/Account/Account";
 import Class from "../BoardComp/Class/Class";
+import ClassDetail from "../BoardComp/Class/ClassDetail";
 import Events from "../BoardComp/Events/Events";
 import Expenses from "../BoardComp/Expenses/Expenses";
 import Overview from "../BoardComp/Overview/Overview";
 import Parents from "../BoardComp/Parents/Parents";
 import Routine from "../BoardComp/Routine/Routine";
 import Students from "../BoardComp/Students/Students";
+import StudentsDetail from "../BoardComp/Students/StudentsDetail";
 import Subject from "../BoardComp/Subject/Subject";
 import TeacherDetail from "../BoardComp/Teahers/TeacherDetail";
 import Teachers from "../BoardComp/Teahers/Teachers";
@@ -34,6 +36,8 @@ const BoardRoute = () => {
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/events" element={<Events />} />
             <Route path="/teachers/:id" element={<TeacherDetail />} />
+            <Route path="/students/:id" element={<StudentsDetail />} />
+            <Route path="/class/:teacherID" element={<ClassDetail />} />
           </Routes>
         </Container>
       ) : null}

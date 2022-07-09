@@ -70,22 +70,22 @@ const Desktop = () => {
               <span>Subjects</span>
             </Nav>
           </MainNav>
-          <MainNav to="/routine">
+          <MainNav to="/performanceclass">
             <Nav>
               <IconHold>
                 <VscCompassActive />
               </IconHold>
-              <span>Class Routine</span>
+              <span> Performace </span>
             </Nav>
           </MainNav>
-          <MainNav to="/events">
+          {/* <MainNav to="/events">
             <Nav>
               <IconHold>
                 <BsCalendar2EventFill />
               </IconHold>
               <span>Events</span>
             </Nav>
-          </MainNav>
+          </MainNav> */}
           <MainNav to="/myprofile">
             <Nav>
               <IconHold>

@@ -5,39 +5,46 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const Class = () => {
-  const adminUser = useSelector((state) => state.user);
-  const [allTeachers, setAllTeachers] = React.useState([]);
+const ClassForSubjects = () => {
+  const [classes, setclasses] = useState([]);
+  const user = useSelector((state) => state.user);
 
-  const getTeachers = async () => {
+  // console.log(user._id);
+
+  const getClasses = async () => {
     const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${globalURL}/api/admin/${adminUser._id}/teachers/get`;
+    const url = `${globalURL}/api/class/${user._id}/`;
 
     await axios.get(url).then((res) => {
-      setAllTeachers(res.data.data.teacher);
-      console.log(res.data.data.teacher);
+      setclasses(res.data.data.class);
+      console.log(res.data.data.class);
     }, []);
   };
 
-  React.useEffect(() => {
-    getTeachers();
-    console.log(allTeachers);
+  useEffect(() => {
+    getClasses();
+    console.log(classes);
   }, []);
   return (
     <Container>
       <Wrapper>
         <h3>All Class</h3>
         <ClassesHold>
-          {allTeachers?.map((props) => (
-            <ClassCard to={`/class/${props._id}`} key={props._id}>
+          {classes?.map((props) => (
+            <ClassCard
+              to={`/performanceclass/performancesubject/${props._id}`}
+              key={props._id}
+            >
               <strong>
                 {" "}
-                <i>Display Name:</i> {props.displayName}{" "}
+                <i>Class Code:</i> {props.classCode}{" "}
               </strong>
-              <span> {props.fullName} </span>
-
-              <small> {props.class.length} Classes</small>
+              <span> {props.className} </span>
+              <small>
+                {" "}
+                {props.subject.length} Subject Offered in this Class
+              </small>
             </ClassCard>
           ))}
         </ClassesHold>
@@ -46,7 +53,7 @@ const Class = () => {
   );
 };
 
-export default Class;
+export default ClassForSubjects;
 
 const Container = styled.div`
   min-height: calc(100vh - 50px);
@@ -58,6 +65,7 @@ const Container = styled.div`
   font-family: poppins;
   display: flex;
   justify-content: center;
+  z-index: 200;
 
   @media (max-width: 770px) {
     margin-left: 50px;

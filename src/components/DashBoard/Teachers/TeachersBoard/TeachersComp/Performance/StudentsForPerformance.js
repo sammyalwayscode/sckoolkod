@@ -46,76 +46,64 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const Parents = () => {
-  const { classID } = useParams();
+const StudentsForPerformance = () => {
+  const { stuModalSwitch } = useContext(GlobalState);
+  const { subjectID } = useParams();
 
-  const [parents, setParents] = React.useState([]);
-  const user = useSelector((state) => state.user);
+  const [classStu, setClassStu] = React.useState([]);
+  // const user = useSelector((state) => state.user);
 
-  console.log(classID);
+  console.log(subjectID);
 
   const getClasses = async () => {
     const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${globalURL}/api/teacher/${user._id}`;
+    const url = `${globalURL}/api/student/${subjectID}/students`;
 
     await axios.get(url).then((res) => {
-      setParents(res.data.data.students);
-      console.log(res.data.data.students);
+      setClassStu(res.data.data.student);
+      console.log(res.data.data.student);
     }, []);
   };
 
   React.useEffect(() => {
     getClasses();
-    // console.log(parents);
+    // console.log(students);
   }, []);
 
   return (
     <>
       <Container>
         <Wrapper>
-          <h3>Parents</h3>
-
+          <DisplayBtnHold>
+            <h3>All Students</h3>
+          </DisplayBtnHold>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <StyledTableCell>Student Name</StyledTableCell>
-                  <StyledTableCell align="right">Father's Name</StyledTableCell>
-                  <StyledTableCell align="right">Mother's Name</StyledTableCell>
-                  <StyledTableCell align="right">
-                    Father's Occuatiom
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    Parent's Phone No
-                  </StyledTableCell>
-                  <StyledTableCell align="right">House Address</StyledTableCell>
-                  <StyledTableCell align="right">ClassRoom</StyledTableCell>
+                  <StyledTableCell align="right">Student Code</StyledTableCell>
+                  <StyledTableCell align="right">Email</StyledTableCell>
+                  <StyledTableCell align="right">Class Code</StyledTableCell>
+                  <StyledTableCell align="right">School Name</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {parents.map((row) => (
+                {classStu?.map((row) => (
                   <StyledTableRow key={row._id}>
                     <StyledTableCell component="th" scope="row">
                       {row.fullName}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentName1}
+                      {row.studentCode}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.classCode}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentName2}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.FathersOccupation}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.parentPhone}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.Address}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.nameOfClass}
+                      {row.schoolName}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -128,7 +116,7 @@ const Parents = () => {
   );
 };
 
-export default Parents;
+export default StudentsForPerformance;
 
 const Container = styledComponents.div`
   min-height: calc(100vh - 50px);

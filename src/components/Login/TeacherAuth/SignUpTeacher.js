@@ -39,8 +39,8 @@ const TeacherRegister = () => {
   const onSubmit = handleSubmit(async (val) => {
     console.log(val);
     const localURL = "http://localhost:2332";
-    const mainURL = "https://skulapp.herokuapp.com";
-    const url = `${localURL}/api/teacher/register`;
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
+    const url = `${globalURL}/api/teacher/register`;
 
     await axios
       .post(url, val)
@@ -65,11 +65,10 @@ const TeacherRegister = () => {
       <Wrapper>
         <Brand>
           <Logo to="/">
-            <Bar>S</Bar>
-            <LogoTitle>SkoolKode</LogoTitle>
+            <img src="/log.png" alt="" />
           </Logo>
 
-          <Text>
+          {/* <Text>
             Access to quantity Teachers and access to quantity Schools
           </Text>
           <Brief>
@@ -78,7 +77,7 @@ const TeacherRegister = () => {
             <br />
             Search all the open positions on the web. Get your own personalized
             salary estimate. Read reviews on over 600,000 companies worldwide
-          </Brief>
+          </Brief> */}
         </Brand>
 
         <Line />
@@ -166,13 +165,13 @@ const TeacherRegister = () => {
           <Button type="submit">Continue</Button>
 
           <Social>
-            <SocialText>Use Social Media</SocialText>
+            {/* <SocialText>Use Social Media</SocialText>
             <Icons>
               <Icon />
               <Icon1 />
               <Icon2 />
               <Icon3 />
-            </Icons>
+            </Icons> */}
             <SocialText>
               Have an Account? <Span to="/signinteacher">Login</Span>
             </SocialText>
@@ -201,7 +200,7 @@ const Error = styled.div`
 
 const Span = styled(Link)`
   margin: 0 5px;
-  color: #742e9d;
+  color: #120c6e;
   font-weight: 700;
   text-decoration: none;
 `;
@@ -257,7 +256,7 @@ const Button = styled.button`
   outline: none;
   border: 0;
   font-family: Poppins;
-  background-color: #742e9d;
+  background-color: #120c6e;
   height: 45px;
   width: 100%;
   color: white;
@@ -280,10 +279,10 @@ const InputTitle = styled.div`
   top: -10px;
   left: 7px;
   padding: 0 3px;
-  background-color: #f7eff1;
+  /* background-color: #120c6e; */
   /* background-clip: content-box; */
   font-weight: 700;
-  color: #742e9d;
+  color: #120c6e;
 `;
 
 const Input = styled.input`
@@ -372,13 +371,21 @@ const Logo = styled(Link)`
   align-items: center;
   flex-direction: column;
   margin: 60px 0;
+
+  img {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 1010px) {
+    width: 90%;
+  }
 `;
 
 const LogoTitle1 = styled.div`
   font-weight: 700;
   color: gray;
   margin-bottom: 50px;
-  color: #742e9d;
+  color: #120c6e;
   font-size: 30px;
   /* text-transform: uppercase; */
   font-family: Pacifico;
@@ -410,6 +417,10 @@ const Brand = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -425,5 +436,5 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f7eff1;
+  /* background-color: #f7eff1; */
 `;

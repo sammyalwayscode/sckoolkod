@@ -1,67 +1,89 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { GlobalState } from "../../../../../ContexGlobal/Global";
 
 const StudentOverviewDetail = () => {
+  const studentUser = useSelector((state) => state.user);
+  const { updateStudentModal } = useContext(GlobalState);
+  // const { id } = useParams();
+
+  const [studentDetailGet, setStudentDetailGet] = React.useState({});
+
+  const getTeachers = async () => {
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
+    const localURL = "http://localhost:2332";
+    const url = `${globalURL}/api/student/${studentUser._id}`;
+    console.log(studentUser._id);
+
+    await axios.get(url).then((res) => {
+      setStudentDetailGet(res.data.data);
+      console.log(res.data.data);
+    }, []);
+  };
+
+  React.useEffect(() => {
+    getTeachers();
+    console.log(studentDetailGet);
+  }, []);
   return (
     <DetailRow>
       <DetailRowHold>
         <h4>About Me</h4>
         <AvatarNameHold>
           <Avatar>
-            <img src="" alt="" />
+            <img src="/ava.png" alt="" />
           </Avatar>
           <NameDetailHold>
-            <Named>Jessia Rose</Named>
-            <Detail>
-              Aliquam erat volutpat. Curabiene natis massa sedde lacustiquen
-              sodale word moun taiery.
-            </Detail>
+            <Named>{studentDetailGet.fullName}</Named>
+            <Detail>{studentDetailGet.profile}</Detail>
           </NameDetailHold>
         </AvatarNameHold>
         <TitleContentMain>
           <TitleContent>
             <Title>Name:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.fullName}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Gender:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.gender} </Content>
           </TitleContent>
           <TitleContent>
             <Title>Father's Name:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.parentName1}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Mother's Name:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.parentName2}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Date Of Birth:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.DOB}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Religion:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.religion}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Father's Occupation:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.FathersOccupation}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Email:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.email} </Content>
           </TitleContent>
           <TitleContent>
             <Title>Class:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.nameOfClass}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Address:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>{studentDetailGet.Address}</Content>
           </TitleContent>
           <TitleContent>
             <Title>Parent Phone No:</Title>
-            <Content>Jessia Rose</Content>
+            <Content>0{studentDetailGet.parentPhone}</Content>
           </TitleContent>
         </TitleContentMain>
       </DetailRowHold>
@@ -72,9 +94,9 @@ const StudentOverviewDetail = () => {
 export default StudentOverviewDetail;
 
 const DetailRow = styled.div`
+  width: 90%;
   display: flex;
   justify-content: center;
-  width: 90%;
   margin: 20px 0;
 `;
 const DetailRowHold = styled.div`
@@ -91,6 +113,12 @@ const Avatar = styled.div`
   width: 80px;
   border-radius: 50%;
   background-color: darkcyan;
+  img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 `;
 const NameDetailHold = styled.div`
   width: 220px;

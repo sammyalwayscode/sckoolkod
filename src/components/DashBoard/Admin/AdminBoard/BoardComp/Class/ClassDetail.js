@@ -8,11 +8,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useContext } from "react";
-import { GlobalState } from "../../../../../ContexGlobal/Global";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,76 +44,73 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const Parents = () => {
-  const { classID } = useParams();
+const ClassDetail = () => {
+  const { teacherID } = useParams();
 
-  const [parents, setParents] = React.useState([]);
+  const [classes, setclasses] = React.useState([]);
   const user = useSelector((state) => state.user);
 
-  console.log(classID);
+  // console.log(user._id);
 
   const getClasses = async () => {
     const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${globalURL}/api/teacher/${user._id}`;
+    const url = `${globalURL}/api/class/${teacherID}/`;
 
     await axios.get(url).then((res) => {
-      setParents(res.data.data.students);
-      console.log(res.data.data.students);
+      setclasses(res.data.data.class);
+      console.log(res.data.data.class);
     }, []);
   };
 
   React.useEffect(() => {
     getClasses();
-    // console.log(parents);
+    console.log(classes);
   }, []);
 
   return (
     <>
       <Container>
         <Wrapper>
-          <h3>Parents</h3>
-
+          <DisplayBtnHold>
+            <h3>All Students</h3>
+          </DisplayBtnHold>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Student Name</StyledTableCell>
-                  <StyledTableCell align="right">Father's Name</StyledTableCell>
-                  <StyledTableCell align="right">Mother's Name</StyledTableCell>
+                  <StyledTableCell>Class Name</StyledTableCell>
                   <StyledTableCell align="right">
-                    Father's Occuatiom
+                    Student In Class
                   </StyledTableCell>
                   <StyledTableCell align="right">
-                    Parent's Phone No
+                    Sunject Offered
                   </StyledTableCell>
-                  <StyledTableCell align="right">House Address</StyledTableCell>
-                  <StyledTableCell align="right">ClassRoom</StyledTableCell>
+                  <StyledTableCell align="right">Class Code</StyledTableCell>
+                  <StyledTableCell align="right">Teacher Code</StyledTableCell>
+                  <StyledTableCell align="right">School Name</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {parents.map((row) => (
+                {classes?.map((row) => (
                   <StyledTableRow key={row._id}>
                     <StyledTableCell component="th" scope="row">
-                      {row.fullName}
+                      {row.className}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentName1}
+                      {row.student.length}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentName2}
+                      {row.subject.length}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.FathersOccupation}
+                      {row.classCode}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentPhone}
+                      {row.teacherCode}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.Address}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.nameOfClass}
+                      {row.schoolName}
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -128,7 +123,7 @@ const Parents = () => {
   );
 };
 
-export default Parents;
+export default ClassDetail;
 
 const Container = styledComponents.div`
   min-height: calc(100vh - 50px);
@@ -140,6 +135,8 @@ const Container = styledComponents.div`
   display: flex;
   justify-content: center;
   font-family: poppins;
+  position: absolute;
+  z-index: 200;
 
   @media (max-width: 770px) {
     margin-left: 50px;

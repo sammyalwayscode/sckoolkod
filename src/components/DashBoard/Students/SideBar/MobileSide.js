@@ -9,24 +9,30 @@ import { BsCalendar2EventFill } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
 import styled from "styled-components";
 import { GlobalState } from "../../../ContexGlobal/Global";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { logOut } from "../../../ReduxGlobal/Global";
+import { useDispatch } from "react-redux";
 
 const MobileSide = () => {
   const { mobDisplay } = useContext(GlobalState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       {mobDisplay ? (
         <MobileContainer>
           <MobileWrapper>
             <NavsCtrl>
-              <MainNav style={{ backgroundColor: " #ffa301" }}>
+              <MainNav to="/">
                 <Nav>
-                  <IconHold style={{ color: "#fff" }}>
+                  <IconHold>
                     <AiFillDashboard />
                   </IconHold>
                   <span>Overview</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/teachers">
                 <Nav>
                   <IconHold>
                     <GiTeacher />
@@ -34,7 +40,7 @@ const MobileSide = () => {
                   <span>Teachers</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/students">
                 <Nav>
                   <IconHold>
                     <IoIosPeople />
@@ -42,15 +48,15 @@ const MobileSide = () => {
                   <span>Students</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              {/* <MainNav>
                 <Nav>
                   <IconHold>
                     <RiParentLine />
                   </IconHold>
                   <span>Parent</span>
                 </Nav>
-              </MainNav>
-              <MainNav>
+              </MainNav> */}
+              <MainNav to="/subject">
                 <Nav>
                   <IconHold>
                     <MdSubject />
@@ -58,30 +64,35 @@ const MobileSide = () => {
                   <span>Subjects</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/routine">
                 <Nav>
                   <IconHold>
                     <VscCompassActive />
                   </IconHold>
-                  <span>Class Routine</span>
+                  <span>Performance</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/myprofile">
                 <Nav>
                   <IconHold>
-                    <BsCalendar2EventFill />
+                    <CgProfile />
                   </IconHold>
-                  <span>Events</span>
+                  <span>My Profile</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNavOut
+                onClick={() => {
+                  dispatch(logOut());
+                  navigate("/");
+                }}
+              >
                 <Nav>
                   <IconHold>
                     <FaPowerOff />
                   </IconHold>
                   <span>Log Out</span>
                 </Nav>
-              </MainNav>
+              </MainNavOut>
             </NavsCtrl>
           </MobileWrapper>
         </MobileContainer>
@@ -108,7 +119,21 @@ const MobileContainer = styled.div`
 const MobileWrapper = styled.div``;
 
 const NavsCtrl = styled.div``;
-const MainNav = styled.div`
+const MainNav = styled(NavLink)`
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  /* border-top: 1px solid gray; */
+  /* border-bottom: 1px solid gray; */
+  &.active {
+    background-color: #ffa301;
+  }
+  cursor: pointer;
+`;
+
+const MainNavOut = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

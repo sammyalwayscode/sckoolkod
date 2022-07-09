@@ -47,8 +47,9 @@ const UpdateModal = () => {
     //   religion,
     //   address,
     // } = val;
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/teacher/${user._id}`;
+    const url = `${globalURL}/api/teacher/${user._id}`;
 
     await axios
       .patch(url, val)

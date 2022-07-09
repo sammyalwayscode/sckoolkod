@@ -9,20 +9,21 @@ import { VscCompassActive } from "react-icons/vsc";
 import { BsCalendar2EventFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { FaPowerOff } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../../ReduxGlobal/Global";
 
 const Desktop = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <Container>
       <Wrapper>
         <NavsCtrl>
-          <MainNav to="/" style={{ backgroundColor: " #ffa301" }}>
+          <MainNav to="/">
             <Nav>
-              <IconHold style={{ color: "#fff" }}>
+              <IconHold>
                 <AiFillDashboard />
               </IconHold>
               <span>Overview</span>
@@ -52,7 +53,7 @@ const Desktop = () => {
               <span>Parents</span>
             </Nav>
           </MainNav> */}
-          <MainNav to="subject">
+          <MainNav to="/subject">
             <Nav>
               <IconHold>
                 <MdSubject />
@@ -85,11 +86,11 @@ const Desktop = () => {
               <span>My Profile</span>
             </Nav>
           </MainNav>
-          <MainNav to="">
+          <MainNavOut>
             <Nav
               onClick={() => {
                 dispatch(logOut());
-                // navigate("/home");
+                navigate("/");
               }}
             >
               <IconHold>
@@ -97,7 +98,7 @@ const Desktop = () => {
               </IconHold>
               <span>Log Out</span>
             </Nav>
-          </MainNav>
+          </MainNavOut>
         </NavsCtrl>
       </Wrapper>
     </Container>
@@ -130,9 +131,20 @@ const MainNav = styled(NavLink)`
   /* border-bottom: 1px solid gray; */
   cursor: pointer;
 
-  /* &.active{
+  &.active {
     background-color: #ffa301;
-  } */
+  }
+`;
+
+const MainNavOut = styled.div`
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  /* border-top: 1px solid gray; */
+  /* border-bottom: 1px solid gray; */
+  cursor: pointer;
 `;
 
 const IconHold = styled.section`

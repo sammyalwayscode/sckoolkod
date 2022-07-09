@@ -125,14 +125,14 @@ const RowOne = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     justify-content: center;
   }
 `;
 const Boxes = styled.div`
   height: 120px;
-  width: 375px;
+  width: 360px;
   background-color: #fff;
   margin: 10px 10px;
   display: flex;
@@ -140,6 +140,10 @@ const Boxes = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 6px;
+
+  @media (max-width: 770px) {
+    width: 90%;
+  }
 
   span {
     font-size: 15px;
@@ -160,6 +164,11 @@ const BoxOneIconHold = styled.div`
 
 const RowTwo = styled.div`
   display: flex;
+  /* flex-wrap: wrap; */
+
+  @media (max-width: 770px) {
+    display: block;
+  }
 `;
 const ColoumOne = styled.div`
   width: 375px;
@@ -167,8 +176,13 @@ const ColoumOne = styled.div`
   background-color: #fff;
   display: flex;
   justify-content: center;
-  margin: 0 10px;
+  align-items: center;
+  margin: 10px 10px;
   border-radius: 6px;
+
+  @media (max-width: 770px) {
+    width: 90%;
+  }
 `;
 const ColoumTwo = styled.div`
   /* margin: 0 10px; */
@@ -183,20 +197,29 @@ const TopTwoRow = styled.div`
 const RowTwoDetail = styled.div`
   display: flex;
   justify-content: space-between;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     justify-content: center;
   }
+
+  /* @media (max-width: 500px) {
+    width: 90%;
+  } */
 `;
 const BoxTwo = styled.div`
   height: 90px;
   width: 240px;
   background-color: #fff;
-  /* margin: 10px 10px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 4px;
+  @media (max-width: 768px) {
+    margin: 10px 10px;
+  }
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 const IconHold = styled.div`
   margin: 0 10px;
@@ -217,4 +240,9 @@ const Num = styled.div`
   font-weight: 600;
 `;
 
-const BottomTwoRow = styled.div``;
+const BottomTwoRow = styled.div`
+  @media (max-width: 770px) {
+    display: flex;
+    justify-content: center;
+  }
+`;

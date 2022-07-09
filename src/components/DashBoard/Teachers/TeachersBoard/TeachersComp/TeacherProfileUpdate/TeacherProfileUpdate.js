@@ -15,9 +15,9 @@ const TeacherProfileUpdate = () => {
   const [teacherDetailGet, setTeacherDetailGet] = React.useState({});
 
   const getTeachers = async () => {
-    const mainURL = "";
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/teacher/${teacherUser._id}`;
+    const url = `${globalURL}/api/teacher/${teacherUser._id}`;
 
     await axios.get(url).then((res) => {
       setTeacherDetailGet(res.data.data);

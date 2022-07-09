@@ -67,9 +67,9 @@ const ProfileUpdate = () => {
   const [studentDetailGet, setStudentDetailGet] = React.useState({});
 
   const getTeachers = async () => {
-    const mainURL = "";
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/student/${user._id}`;
+    const url = `${globalURL}/api/student/${user._id}`;
     console.log(user._id);
 
     await axios.get(url).then((res) => {
@@ -216,10 +216,13 @@ const Overlay = styled.div`
   height: 100%;
   font-family: poppins;
   z-index: 600;
+  /* display: flex;
+  justify-content: center; */
+  align-items: center;
 `;
 const ModalContainer = styled.div`
-  max-width: 600px;
-  width: 100%;
+  /* max-width: 600px; */
+  /* width: 100%; */
   /* height: 350px; */
   position: fixed;
   top: 50%;
@@ -277,6 +280,7 @@ const InputHold = styled.div`
 
 const InputWrap = styled.div`
   display: flex;
+  /* flex-direction: column; */
 `;
 const WrapMain = styled.div`
   margin: 0 10px;

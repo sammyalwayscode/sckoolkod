@@ -57,9 +57,9 @@ const Teacher = () => {
   console.log(classID);
 
   const getTeachers = async () => {
-    const mainURL = "";
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/admin/${adminUser._id}/teachers/get`;
+    const url = `${globalURL}/api/admin/${adminUser._id}/teachers/get`;
 
     await axios.get(url).then((res) => {
       setAllTeachers(res.data.data.teacher);
