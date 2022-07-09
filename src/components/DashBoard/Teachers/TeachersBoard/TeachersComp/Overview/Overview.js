@@ -7,6 +7,8 @@ import { BsFillDisplayFill } from "react-icons/bs";
 import { VscSymbolClass } from "react-icons/vsc";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import DoughnutChart from "./DoughnutChart";
+import PieChart from "./PieChart";
 
 const Overview = () => {
   const teacherUser = useSelector((state) => state.user);
@@ -70,12 +72,16 @@ const Overview = () => {
               <IconHold bgi="#FFEAEA">
                 <IoIosPeople color="#FF0000" />
               </IconHold>
-              <span>23,0000</span>
-              <small>Totla Students</small>
+              <span> {teacherUser.students.length} </span>
+              <small>Total Students</small>
             </InnerBox>
           </FirstBox>
-          <SecondBox></SecondBox>
-          <ThirdBox></ThirdBox>
+          <SecondBox>
+            <DoughnutChart />
+          </SecondBox>
+          <ThirdBox>
+            <PieChart />
+          </ThirdBox>
         </RowTwo>
       </Wrapper>
     </Container>
@@ -92,6 +98,8 @@ const Container = styled.div`
   margin-left: 180px;
   background-color: #f0f1f3;
   font-family: poppins;
+  display: flex;
+  justify-content: center;
 
   @media (max-width: 770px) {
     margin-left: 50px;
@@ -113,14 +121,14 @@ const RowOne = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   @media (max-width: 768px) {
     justify-content: center;
   }
 `;
 const Boxes = styled.div`
   height: 120px;
-  width: 375px;
+  width: 360px;
   background-color: #fff;
   margin: 10px 10px;
   display: flex;
@@ -128,6 +136,10 @@ const Boxes = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 6px;
+
+  @media (max-width: 770px) {
+    width: 90%;
+  }
 
   span {
     font-size: 15px;
@@ -148,27 +160,34 @@ const BoxOneIconHold = styled.div`
 
 const RowTwo = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 const FirstBox = styled.div`
   height: 350px;
-  width: 375px;
+  width: 360px;
   /* background-color: #fff; */
   margin: 10px 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   /* border-radius: 6px; */
+
+  @media (max-width: 700px) {
+    width: 90%;
+    justify-content: center;
+  }
 `;
 const SecondBox = styled.div`
-  width: 370px;
-  height: 335px;
-  background-color: darkcyan;
+  width: 350px;
+  height: 350px;
+  background-color: #fff;
   margin: 10px 10px;
 `;
 const ThirdBox = styled.div`
-  width: 370px;
-  height: 335px;
-  background-color: gold;
+  width: 350px;
+  height: 350px;
+  background-color: #fff;
   margin: 10px 10px;
 `;
 
@@ -186,6 +205,11 @@ const InnerBox = styled.div`
   }
   small {
     font-size: 11px;
+  }
+
+  @media (max-width: 700px) {
+    width: 150px;
+    margin: 10px;
   }
 `;
 

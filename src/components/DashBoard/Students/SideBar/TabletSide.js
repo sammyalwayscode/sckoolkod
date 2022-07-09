@@ -167,6 +167,7 @@ const TabDisplayContainer = styled.div`
     /* background-color: hotpink; */
     background-color: #031e3e;
     width: 50px;
+    position: fixed;
   }
 
   @media (max-width: 500px) {
@@ -184,7 +185,7 @@ const ContainerDisplay = styled.div`
     /* background-color: gold; */
     background-color: #031e3e;
     width: 180px;
-    position: absolute;
+    position: fixed;
     font-family: poppins;
   }
 

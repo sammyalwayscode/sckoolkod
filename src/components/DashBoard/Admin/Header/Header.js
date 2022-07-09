@@ -54,6 +54,7 @@ const Container = styled.div`
   backdrop-filter: blur(10px);
   position: fixed;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-family: poppins;
 `;
 const Wrapper = styled.div`
   width: 1300px;

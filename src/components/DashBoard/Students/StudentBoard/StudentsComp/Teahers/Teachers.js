@@ -12,9 +12,9 @@ const Teachers = () => {
   const [teacherDetailGet, setTeacherDetailGet] = React.useState({});
 
   const getTeachers = async () => {
-    const mainURL = "";
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/student/teacher/${studentUser.classTeacher}`;
+    const url = `${globalURL}/api/student/teacher/${studentUser.classTeacher}`;
 
     await axios.get(url).then((res) => {
       setTeacherDetailGet(res.data.data);
@@ -121,8 +121,13 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 1150px;
+
   @media (max-width: 1150px) {
     width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   button {
@@ -155,6 +160,10 @@ const DetailContainerWrapper = styled.div`
 `;
 const DetailContainerHold = styled.div`
   display: flex;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 const DetailImageContainer = styled.div`
   height: 230px;
@@ -171,7 +180,7 @@ const DetailImageContainer = styled.div`
   }
 `;
 const DetailTextContainer = styled.div`
-  width: 600px;
+  /* width: 600px; */
   /* background-color: red; */
 `;
 const TeachersName = styled.div`

@@ -34,8 +34,9 @@ const AddStudentModal = () => {
   const onSubmit = handleSubmit(async (val) => {
     console.log(val);
     // const { expenseAmount, itemName, itemQuantity, sourcePurchase } = val;
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/expense/${user._id}`;
+    const url = `${globalURL}/api/expense/${user._id}`;
 
     await axios.post(url, val);
 

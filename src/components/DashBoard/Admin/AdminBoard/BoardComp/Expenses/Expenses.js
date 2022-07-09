@@ -59,7 +59,8 @@ const Students = () => {
   const getClasses = async () => {
     const mainURL = "";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/expense/${user._id}`;
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
+    const url = `${globalURL}/api/expense/${user._id}`;
 
     await axios.get(url).then((res) => {
       setExpense(res.data.data.expense);

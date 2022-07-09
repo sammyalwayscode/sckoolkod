@@ -42,7 +42,7 @@ const StudentOverviewTable = () => {
     createData("Gingerbread", 356, 16.0, 49, 3.9),
   ];
   return (
-    <div>
+    <TableWrap>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -69,8 +69,15 @@ const StudentOverviewTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </TableWrap>
   );
 };
 
 export default StudentOverviewTable;
+
+const TableWrap = styledComponents.div`
+@media (max-width: 770px){
+  width: 90%;
+  justify-content: center;
+}
+`;

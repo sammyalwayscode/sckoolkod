@@ -54,9 +54,9 @@ const Subject = () => {
   console.log(classID);
 
   const getSubjects = async () => {
-    const mainURL = "";
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/subject/${classID}/class`;
+    const url = `${globalURL}/api/subject/${classID}/class`;
 
     await axios.get(url).then((res) => {
       setSubjects(res.data.data.subject);
@@ -136,8 +136,6 @@ const Container = styledComponents.div`
   display: flex;
   justify-content: center;
   font-family: poppins;
-  position: absolute;
-  z-index: 200;
 
   @media (max-width: 770px) {
     margin-left: 50px;
@@ -158,6 +156,7 @@ min-width: 1150px;
 const AddTableSubDisplay = styledComponents.div`
 display: flex;
 justify-content:space-between;
+flex-wrap:wrap;
 `;
 
 const AllSubjectDisplay = styledComponents.div`

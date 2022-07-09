@@ -1,65 +1,139 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Link, NavLink } from "react-router-dom";
-import axios from "axios";
-import { useEffect } from "react";
+import * as React from "react";
+import styledComponents from "styled-components";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import { useContext } from "react";
+import { GlobalState } from "../../../../../ContexGlobal/Global";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { NavLink, useParams } from "react-router-dom";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
 
 const Students = () => {
-  const adminUser = useSelector((state) => state.user);
-  const [allTeachers, setAllTeachers] = React.useState([]);
+  const { stuModalSwitch } = useContext(GlobalState);
+  const { classID } = useParams();
 
-  const getTeachers = async () => {
-    const mainURL = "";
+  const adminUser = useSelector((state) => state.user);
+
+  const [allStudents, setAllStudents] = React.useState([]);
+
+  console.log(classID);
+
+  const getStudents = async () => {
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/admin/${adminUser._id}/teachers/get`;
+    const url = `${globalURL}/api/admin/${adminUser._id}/students/get`;
 
     await axios.get(url).then((res) => {
-      setAllTeachers(res.data.data.teacher);
-      console.log(res.data.data.teacher);
+      setAllStudents(res.data.data.students);
+      console.log(res.data.data.students);
     }, []);
   };
 
   React.useEffect(() => {
-    getTeachers();
-    console.log(allTeachers);
+    getStudents();
+    console.log(allStudents);
   }, []);
+
   return (
-    <Container>
-      <Wrapper>
-        <h3>All Class</h3>
-        <ClassesHold>
-          {allTeachers?.map((props) => (
-            <ClassCard to={`/allclass/${props._id}`} key={props._id}>
-              <strong>
-                {" "}
-                <i>Display Name:</i> {props.displayName}{" "}
-              </strong>
-              <span> {props.fullName} </span>
-              <SmallCtr>
-                <small> {props.class.length} Classes</small>
-                <small> 20 Students</small>
-              </SmallCtr>
-            </ClassCard>
-          ))}
-        </ClassesHold>
-      </Wrapper>
-    </Container>
+    <>
+      <Container>
+        <Wrapper>
+          <h3>All Students</h3>
+
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>...</StyledTableCell>
+                  <StyledTableCell>Student Name</StyledTableCell>
+                  <StyledTableCell align="right">Class Code</StyledTableCell>
+                  <StyledTableCell align="right">Email</StyledTableCell>
+                  <StyledTableCell align="right">Parent's No</StyledTableCell>
+                  <StyledTableCell align="right">Class Room</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {allStudents?.map((row) => (
+                  <StyledTableRow key={row._id}>
+                    <StyledTableCell component="th" scope="row">
+                      <AvatarName to={`/students/${row._id}`}>
+                        <strong> {row.fullName.charAt()} </strong>
+                      </AvatarName>
+                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                      {row.fullName}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.classCode}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.parentPhone}
+                    </StyledTableCell>
+                    <StyledTableCell align="right">
+                      {row.nameOfClass}
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
 export default Students;
 
-const Container = styled.div`
+const Container = styledComponents.div`
   min-height: calc(100vh - 50px);
   margin-top: 50px;
   background-color: #f0f1f3;
   width: calc(100vw - 180px);
   margin-left: 180px;
   background-color: #f0f1f3;
-  font-family: poppins;
   display: flex;
   justify-content: center;
+  font-family: poppins;
 
   @media (max-width: 770px) {
     margin-left: 50px;
@@ -70,51 +144,27 @@ const Container = styled.div`
     width: 100vw;
   }
 `;
-const Wrapper = styled.div`
-  width: 1150px;
-  @media (max-width: 1150px) {
-    width: 95%;
-  }
+const Wrapper = styledComponents.div`
+width: 1150px;
+@media (max-width: 1150px) {
+  width: 95%;
+}
 `;
 
-const ClassesHold = styled.div`
+const AvatarName = styledComponents(NavLink)`
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #031e3e;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-`;
-const ClassCard = styled(NavLink)`
+  align-items:center;
+  font-family: poppins;
+  cursor: pointer;
   text-decoration: none;
-  height: 200px;
-  width: 300px;
-  background-color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 5px;
-  margin: 8px;
-  :hover {
-    cursor: pointer;
-  }
-  span {
-    font-size: 22px;
-    font-weight: 800;
-    color: #000;
-  }
 
-  small {
-    color: #000;
-  }
-
-  strong {
-    margin-bottom: 20px;
-    color: #000;
-  }
-`;
-
-const SmallCtr = styled.div`
-  small {
-    margin: 10px;
+  strong{
+    color: #fff;
+    font-weight: bold;
   }
 `;

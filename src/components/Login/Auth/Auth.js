@@ -17,11 +17,10 @@ const Auth = () => {
       <Wrapper>
         <Brand>
           <Logo>
-            <Bar>S</Bar>
-            <LogoTitle wid>SkoolKode</LogoTitle>
+            <img src="/log.png" alt="" />
           </Logo>
 
-          <Text>
+          {/* <Text>
             Access to quantity Teachers and access to quantity Schools
           </Text>
           <Brief wid>
@@ -30,7 +29,7 @@ const Auth = () => {
             <br />
             Search all the open positions on the web. Get your own personalized
             salary estimate. Read reviews on over 600,000 companies worldwide
-          </Brief>
+          </Brief> */}
         </Brand>
 
         <Line />
@@ -43,7 +42,7 @@ const Auth = () => {
             </Brief> */}
           </LogoTitle1>
 
-          <HolderData bg="darkorange" to="/signupadmin">
+          <HolderData bg="#0b0742" to="/signupadmin">
             <Content>
               <TextContext>Login as School Admin</TextContext>
               <TextDetail>
@@ -51,10 +50,10 @@ const Auth = () => {
                 companies worldwide
               </TextDetail>
             </Content>
-            <Image src={school} alt="school" />
+            {/* <Image src={school} alt="school" /> */}
           </HolderData>
 
-          <HolderData bg="red" to="/teachersignup">
+          <HolderData bg="#120c6e" to="/teachersignup">
             <Content>
               <TextContext>Login as Teacher</TextContext>
               <TextDetail>
@@ -62,10 +61,10 @@ const Auth = () => {
                 companies worldwide
               </TextDetail>
             </Content>
-            <Image src={perfect} alt="perfect" />
+            {/* <Image src={perfect} alt="perfect" /> */}
           </HolderData>
 
-          <HolderData bg="#742e9d" to="/signstudents">
+          <HolderData bg="#5e72eb" to="/signstudents">
             <Content>
               <TextContext>Login as Student/Parent</TextContext>
               <TextDetail>
@@ -73,7 +72,7 @@ const Auth = () => {
                 companies worldwide
               </TextDetail>
             </Content>
-            <Image src={student} alt="student" />
+            {/* <Image src={student} alt="student" /> */}
           </HolderData>
 
           {/* <Button>Continue</Button> */}
@@ -84,14 +83,14 @@ const Auth = () => {
             <SocialText>{/* <Span to="/">Forgot Pasword?</Span> */}</SocialText>
           </Info>
 
-          <Social>
+          {/* <Social>
             <SocialText>Use Social Media</SocialText>
             <Icons>
               <Icon1 />
               <Icon2 />
               <Icon3 />
             </Icons>
-          </Social>
+          </Social> */}
         </MainCard>
       </Wrapper>
     </Container>
@@ -155,7 +154,7 @@ const HolderData = styled(Link)`
   }
 
   @media screen and (max-width: 425px) {
-    width: 95%;
+    width: 100%;
 
     display: flex;
     /* flex-direction: column; */
@@ -255,7 +254,7 @@ const Text = styled.div`
   width: 300px;
   font-size: 25px;
   line-height: 1.2;
-  color: #742e9d;
+  color: #031e3e;
   font-family: poppins;
 
   @media screen and (max-width: 1010px) {
@@ -270,8 +269,12 @@ const Logo = styled.div`
   flex-direction: column;
   /* margin: 40px 0; */
 
+  img {
+    width: 100%;
+  }
+
   @media screen and (max-width: 1010px) {
-    margin-bottom: 5px;
+    width: 90%;
   }
 `;
 

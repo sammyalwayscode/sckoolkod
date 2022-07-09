@@ -14,9 +14,15 @@ import { VscCompassActive } from "react-icons/vsc";
 import { HiPresentationChartBar } from "react-icons/hi";
 import { BsCalendar2EventFill } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../ReduxGlobal/Global";
 
 const TabletSide = () => {
   const [tabDiaplay, setTabDisplay] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const tabDiaplayHandler = () => {
     setTabDisplay(!tabDiaplay);
@@ -32,52 +38,57 @@ const TabletSide = () => {
               <AiOutlineMenuUnfold />
             </TabBar>
             <NavIconCtrl>
-              <MainIconNav style={{ backgroundColor: "#ffa301" }}>
-                <IconNav style={{ color: "#fff" }}>
+              <MainIconNav to="/">
+                <IconNav>
                   <AiFillDashboard />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/teachers">
                 <IconNav>
                   <GiTeacher />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/students">
                 <IconNav>
                   <IoIosPeople />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/parents">
                 <IconNav>
                   <RiParentLine />
                 </IconNav>
               </MainIconNav>
 
-              <MainIconNav>
+              <MainIconNav to="/allclass">
                 <IconNav>
                   <SiGoogleclassroom />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/classsubject">
                 <IconNav>
                   <MdSubject />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/performanceclass">
                 <IconNav>
                   <VscCompassActive />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNav to="/myprofile">
                 <IconNav>
-                  <BsCalendar2EventFill />
+                  <CgProfile />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav>
+              <MainIconNavOut
+                onClick={() => {
+                  dispatch(logOut());
+                  navigate("/");
+                }}
+              >
                 <IconNav>
                   <FaPowerOff />
                 </IconNav>
-              </MainIconNav>
+              </MainIconNavOut>
             </NavIconCtrl>
           </TabDisplayWrapper>
         </TabDisplayContainer>
@@ -88,15 +99,15 @@ const TabletSide = () => {
               <AiOutlineMenuFold />
             </Bar>
             <NavsCtrl>
-              <MainNav style={{ backgroundColor: " #ffa301" }}>
+              <MainNav to="/">
                 <Nav>
-                  <IconHold style={{ color: "#fff" }}>
+                  <IconHold>
                     <AiFillDashboard />
                   </IconHold>
                   <span>Overview</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/teachers">
                 <Nav>
                   <IconHold>
                     <GiTeacher />
@@ -104,7 +115,7 @@ const TabletSide = () => {
                   <span>Teachers</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/students">
                 <Nav>
                   <IconHold>
                     <IoIosPeople />
@@ -112,7 +123,7 @@ const TabletSide = () => {
                   <span>Students</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/parents">
                 <Nav>
                   <IconHold>
                     <RiParentLine />
@@ -121,7 +132,7 @@ const TabletSide = () => {
                 </Nav>
               </MainNav>
 
-              <MainNav>
+              <MainNav to="/allclass">
                 <Nav>
                   <IconHold>
                     <SiGoogleclassroom />
@@ -129,7 +140,7 @@ const TabletSide = () => {
                   <span>Class</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/classsubject">
                 <Nav>
                   <IconHold>
                     <MdSubject />
@@ -137,31 +148,36 @@ const TabletSide = () => {
                   <span>Subjects</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/performanceclass">
                 <Nav>
                   <IconHold>
                     <VscCompassActive />
                   </IconHold>
-                  <span>Class Routine</span>
+                  <span>Performance</span>
                 </Nav>
               </MainNav>
 
-              <MainNav>
+              <MainNav to="/myprofile">
                 <Nav>
                   <IconHold>
                     <BsCalendar2EventFill />
                   </IconHold>
-                  <span>Events</span>
+                  <span>My Profile</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainIconNavOut
+                onClick={() => {
+                  dispatch(logOut());
+                  navigate("/");
+                }}
+              >
                 <Nav>
                   <IconHold>
                     <FaPowerOff />
                   </IconHold>
                   <span>Log Out</span>
                 </Nav>
-              </MainNav>
+              </MainIconNavOut>
             </NavsCtrl>
           </WrapperDiaplay>
         </ContainerDisplay>
@@ -181,6 +197,7 @@ const TabDisplayContainer = styled.div`
     /* background-color: hotpink; */
     background-color: #031e3e;
     width: 50px;
+    position: fixed;
   }
 
   @media (max-width: 500px) {
@@ -198,7 +215,7 @@ const ContainerDisplay = styled.div`
     /* background-color: gold; */
     background-color: #031e3e;
     width: 180px;
-    position: absolute;
+    position: fixed;
     font-family: poppins;
   }
 
@@ -217,7 +234,15 @@ const TabBar = styled.div`
 `;
 
 const NavIconCtrl = styled.div``;
-const MainIconNav = styled.div`
+const MainIconNav = styled(NavLink)`
+  text-decoration: none;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MainIconNavOut = styled.div`
   height: 40px;
   display: flex;
   justify-content: center;
@@ -237,7 +262,8 @@ const Bar = styled.div`
 `;
 
 const NavsCtrl = styled.div``;
-const MainNav = styled.div`
+const MainNav = styled(NavLink)`
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;

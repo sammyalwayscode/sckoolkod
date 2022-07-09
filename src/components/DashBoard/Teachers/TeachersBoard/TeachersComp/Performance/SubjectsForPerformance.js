@@ -8,11 +8,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useContext } from "react";
-import { GlobalState } from "../../../../../ContexGlobal/Global";
-import { useSelector } from "react-redux";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
+import moment from "moment";
+import { Button } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,76 +45,70 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-const Parents = () => {
+const SubjectsForPerformance = () => {
   const { classID } = useParams();
 
-  const [parents, setParents] = React.useState([]);
-  const user = useSelector((state) => state.user);
+  const [subjects, setSubjects] = React.useState([]);
+  // const user = useSelector((state) => state.user);
 
   console.log(classID);
 
-  const getClasses = async () => {
+  const getSubjects = async () => {
     const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${globalURL}/api/teacher/${user._id}`;
+    const url = `${globalURL}/api/subject/${classID}/class`;
 
     await axios.get(url).then((res) => {
-      setParents(res.data.data.students);
-      console.log(res.data.data.students);
+      setSubjects(res.data.data.subject);
+      console.log(res.data.data.subject);
     }, []);
   };
 
   React.useEffect(() => {
-    getClasses();
-    // console.log(parents);
+    getSubjects();
+    // console.log(students);
   }, []);
 
   return (
     <>
       <Container>
         <Wrapper>
-          <h3>Parents</h3>
+          <h3>All Subjects</h3>
 
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell>Student Name</StyledTableCell>
-                  <StyledTableCell align="right">Father's Name</StyledTableCell>
-                  <StyledTableCell align="right">Mother's Name</StyledTableCell>
+                  <StyledTableCell>Subject</StyledTableCell>
+                  <StyledTableCell align="right">Subject Type</StyledTableCell>
                   <StyledTableCell align="right">
-                    Father's Occuatiom
+                    Subject Teacher
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    Parent's Phone No
-                  </StyledTableCell>
-                  <StyledTableCell align="right">House Address</StyledTableCell>
-                  <StyledTableCell align="right">ClassRoom</StyledTableCell>
+                  <StyledTableCell align="right">Date</StyledTableCell>
+                  <StyledTableCell align="right">...</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {parents.map((row) => (
+                {subjects?.map((row) => (
                   <StyledTableRow key={row._id}>
                     <StyledTableCell component="th" scope="row">
-                      {row.fullName}
+                      {row.subjectName}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentName1}
+                      {row.subjectType}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentName2}
+                      {row.subjectTeacher}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.FathersOccupation}
+                      {moment(row.createdAt).format("L")}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {row.parentPhone}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.Address}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {row.nameOfClass}
+                      <NavLink
+                        to={`/performanceclass/performancesubject/students/${row._id}`}
+                      >
+                        <button>Add Performance</button>
+                      </NavLink>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -128,7 +121,7 @@ const Parents = () => {
   );
 };
 
-export default Parents;
+export default SubjectsForPerformance;
 
 const Container = styledComponents.div`
   min-height: calc(100vh - 50px);
@@ -155,25 +148,20 @@ width: 1150px;
 @media (max-width: 1150px) {
   width: 95%;
 }
-`;
 
-const DisplayBtnHold = styledComponents.div`
-display: flex;
-justify-content: space-between;
-align-items: center;
-
-button{
-  height: 30px;
-  width: 110px;
-  border: 0;
-  outline: none;
-  /* background-color: #ffa301; */
-  background-color: #031e3e;
-  color: #fff;
-  font-family: poppins;
-  font-weight: 700;
-  margin: 0 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
+button {
+    // height: 35px;
+    // width: 120px;
+    padding: 5px 15px;
+    border: 0;
+    outline: none;
+    /* background-color: #ffa301; */
+    background-color: #031e3e;
+    color: #fff;
+    font-family: poppins;
+    font-weight: 700;
+    margin: 0 8px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 `;

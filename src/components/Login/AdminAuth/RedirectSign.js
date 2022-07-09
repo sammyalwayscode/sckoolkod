@@ -38,8 +38,8 @@ const RedirectSign = () => {
   const onSubmit = handleSubmit(async (val) => {
     console.log(val);
     const localURL = "http://localhost:2332";
-    // const mainURL = "https://skulapp.herokuapp.com";
-    const url = `${localURL}/api/admin/signin`;
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
+    const url = `${globalURL}/api/admin/signin`;
 
     await axios
       .post(url, val)
@@ -72,11 +72,10 @@ const RedirectSign = () => {
       <Wrapper>
         <Brand>
           <Logo to="/">
-            <Bar>S</Bar>
-            <LogoTitle>SkoolKode</LogoTitle>
+            <img src="/log.png" alt="" />
           </Logo>
 
-          <Text>
+          {/* <Text>
             Access to quantity Teachers and access to quantity Schools
           </Text>
           <Brief>
@@ -85,7 +84,7 @@ const RedirectSign = () => {
             <br />
             Search all the open positions on the web. Get your own personalized
             salary estimate. Read reviews on over 600,000 companies worldwide
-          </Brief>
+          </Brief> */}
         </Brand>
 
         <Line />
@@ -119,7 +118,7 @@ const RedirectSign = () => {
               <Span to="/">Forgot Pasword rd?</Span>
             </SocialText>
           </Info>
-
+          {/* 
           <Social>
             <SocialText>Use Social Media</SocialText>
             <Icons>
@@ -128,7 +127,7 @@ const RedirectSign = () => {
               <Icon2 />
               <Icon3 />
             </Icons>
-          </Social>
+          </Social> */}
         </MainCard>
       </Wrapper>
     </Container>
@@ -175,7 +174,7 @@ const Info = styled.div`
 
 const Span = styled(Link)`
   margin: 0 5px;
-  color: #742e9d;
+  color: #0b0742;
   font-weight: 700;
   text-decoration: none;
 `;
@@ -227,7 +226,7 @@ const Button = styled.button`
   font-family: Poppins;
   margin-top: 20px;
   margin-bottom: 10px;
-  background-color: #742e9d;
+  background-color: #0b0742;
   height: 45px;
   width: 100%;
   color: white;
@@ -250,10 +249,10 @@ const InputTitle = styled.div`
   top: -10px;
   left: 7px;
   padding: 0 3px;
-  background-color: #f7eff1;
+  /* background-color: #f7eff1; */
   /* background-clip: content-box; */
   font-weight: 700;
-  color: #742e9d;
+  color: #0b0742;
 `;
 
 const Input = styled.input`
@@ -343,13 +342,21 @@ const Logo = styled(Link)`
   align-items: center;
   flex-direction: column;
   margin: 60px 0;
+
+  img {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 1010px) {
+    width: 90%;
+  }
 `;
 
 const LogoTitle1 = styled.div`
   font-weight: 700;
   color: gray;
   margin-bottom: 50px;
-  color: #742e9d;
+  color: #0b0742;
   font-size: 30px;
   /* text-transform: uppercase; */
   font-family: Pacifico;
@@ -381,6 +388,10 @@ const Brand = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const Wrapper = styled.div`

@@ -14,10 +14,15 @@ import { VscCompassActive } from "react-icons/vsc";
 import { HiPresentationChartBar } from "react-icons/hi";
 import { BsCalendar2EventFill } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../ReduxGlobal/Global";
 
 const TabletSide = () => {
   const [tabDiaplay, setTabDisplay] = useState(true);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const tabDiaplayHandler = () => {
     setTabDisplay(!tabDiaplay);
@@ -53,32 +58,37 @@ const TabletSide = () => {
                   <RiParentLine />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav to="/account">
+              {/* <MainIconNav to="/account">
                 <IconNav>
                   <MdAccountTree />
                 </IconNav>
-              </MainIconNav>
+              </MainIconNav> */}
               <MainIconNav to="/class">
                 <IconNav>
                   <SiGoogleclassroom />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav to="/routine">
+              {/* <MainIconNav to="/routine">
                 <IconNav>
                   <VscCompassActive />
                 </IconNav>
-              </MainIconNav>
-              <MainIconNav to="/attendance">
+              </MainIconNav> */}
+              <MainIconNav to="/expenses">
                 <IconNav>
                   <HiPresentationChartBar />
                 </IconNav>
               </MainIconNav>
-              <MainIconNav to="/events">
+              {/* <MainIconNav to="/events">
                 <IconNav>
                   <BsCalendar2EventFill />
                 </IconNav>
-              </MainIconNav>
-              <MainIconNavOut>
+              </MainIconNav> */}
+              <MainIconNavOut
+                onClick={() => {
+                  dispatch(logOut());
+                  navigate("/");
+                }}
+              >
                 <IconNav>
                   <FaPowerOff />
                 </IconNav>
@@ -93,9 +103,9 @@ const TabletSide = () => {
               <AiOutlineMenuFold />
             </Bar>
             <NavsCtrl>
-              <MainNav to="/" style={{ backgroundColor: " #ffa301" }}>
+              <MainNav to="/">
                 <Nav>
-                  <IconHold style={{ color: "#fff" }}>
+                  <IconHold>
                     <AiFillDashboard />
                   </IconHold>
                   <span>Dashboard</span>
@@ -125,14 +135,14 @@ const TabletSide = () => {
                   <span>Parents</span>
                 </Nav>
               </MainNav>
-              <MainNav to="/account">
+              {/* <MainNav to="/account">
                 <Nav>
                   <IconHold>
                     <MdAccountTree />
                   </IconHold>
                   <span>Account</span>
                 </Nav>
-              </MainNav>
+              </MainNav> */}
               <MainNav to="/class">
                 <Nav>
                   <IconHold>
@@ -141,15 +151,15 @@ const TabletSide = () => {
                   <span>Class</span>
                 </Nav>
               </MainNav>
-              <MainNav to="/routine">
+              {/* <MainNav to="/routine">
                 <Nav>
                   <IconHold>
                     <VscCompassActive />
                   </IconHold>
                   <span>Class Routine</span>
                 </Nav>
-              </MainNav>
-              <MainNav to="/attendance">
+              </MainNav> */}
+              <MainNav to="/expenses">
                 <Nav>
                   <IconHold>
                     <HiPresentationChartBar />
@@ -157,15 +167,20 @@ const TabletSide = () => {
                   <span>Expenses</span>
                 </Nav>
               </MainNav>
-              <MainNav to="/events">
+              {/* <MainNav to="/events">
                 <Nav>
                   <IconHold>
                     <BsCalendar2EventFill />
                   </IconHold>
                   <span>Events</span>
                 </Nav>
-              </MainNav>
-              <MainNavOut>
+              </MainNav> */}
+              <MainNavOut
+                onClick={() => {
+                  dispatch(logOut());
+                  navigate("/");
+                }}
+              >
                 <Nav>
                   <IconHold>
                     <FaPowerOff />
@@ -234,6 +249,10 @@ const MainIconNav = styled(NavLink)`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.active {
+    background-color: #ffa301;
+  }
 `;
 
 const MainIconNavOut = styled.div`
@@ -267,6 +286,10 @@ const MainNav = styled(NavLink)`
   /* border-bottom: 1px solid gray; */
 
   cursor: pointer;
+
+  &.active {
+    background-color: #ffa301;
+  }
 `;
 
 const MainNavOut = styled.div`

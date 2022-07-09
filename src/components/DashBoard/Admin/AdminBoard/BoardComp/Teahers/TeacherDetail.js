@@ -12,9 +12,9 @@ const TeacherDetail = () => {
   const [teacherDetailGet, setTeacherDetailGet] = React.useState({});
 
   const getTeachers = async () => {
-    const mainURL = "";
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/teacher/${id}`;
+    const url = `${globalURL}/api/teacher/${id}`;
 
     await axios.get(url).then((res) => {
       setTeacherDetailGet(res.data.data);

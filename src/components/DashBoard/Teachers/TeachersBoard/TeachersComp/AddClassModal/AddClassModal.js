@@ -31,7 +31,8 @@ const AddClassModal = () => {
     console.log(val);
     // const { expenseAmount, itemName, itemQuantity, sourcePurchase } = val;
     const localURL = "http://localhost:2332";
-    const url = `${localURL}/api/class/${id}`;
+    const globalURL = "https://sckoolkode-bakend.herokuapp.com";
+    const url = `${globalURL}/api/class/${id}`;
 
     await axios.post(url, val);
 

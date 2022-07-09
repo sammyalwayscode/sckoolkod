@@ -10,24 +10,29 @@ import { BsCalendar2EventFill } from "react-icons/bs";
 import { FaPowerOff } from "react-icons/fa";
 import styled from "styled-components";
 import { GlobalState } from "../../../ContexGlobal/Global";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../ReduxGlobal/Global";
 
 const MobileSide = () => {
   const { mobDisplay } = useContext(GlobalState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       {mobDisplay ? (
         <MobileContainer>
           <MobileWrapper>
             <NavsCtrl>
-              <MainNav style={{ backgroundColor: " #ffa301" }}>
+              <MainNav to="/">
                 <Nav>
-                  <IconHold style={{ color: "#fff" }}>
+                  <IconHold>
                     <AiFillDashboard />
                   </IconHold>
                   <span>Overview</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/teachers">
                 <Nav>
                   <IconHold>
                     <GiTeacher />
@@ -35,7 +40,7 @@ const MobileSide = () => {
                   <span>Teachers</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/students">
                 <Nav>
                   <IconHold>
                     <IoIosPeople />
@@ -43,7 +48,7 @@ const MobileSide = () => {
                   <span>Students</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/parents">
                 <Nav>
                   <IconHold>
                     <RiParentLine />
@@ -52,7 +57,7 @@ const MobileSide = () => {
                 </Nav>
               </MainNav>
 
-              <MainNav>
+              <MainNav to="/allclass">
                 <Nav>
                   <IconHold>
                     <SiGoogleclassroom />
@@ -60,7 +65,7 @@ const MobileSide = () => {
                   <span>Classes</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/classsubject">
                 <Nav>
                   <IconHold>
                     <MdSubject />
@@ -68,30 +73,35 @@ const MobileSide = () => {
                   <span>Subjects</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              <MainNav to="/performanceclass">
                 <Nav>
                   <IconHold>
                     <VscCompassActive />
                   </IconHold>
-                  <span>Class Routine</span>
+                  <span>Performance</span>
                 </Nav>
               </MainNav>
-              <MainNav>
+              {/* <MainNav>
                 <Nav>
                   <IconHold>
                     <BsCalendar2EventFill />
                   </IconHold>
                   <span>Events</span>
                 </Nav>
-              </MainNav>
-              <MainNav>
+              </MainNav> */}
+              <MainNavOut
+                onClick={() => {
+                  dispatch(logOut());
+                  navigate("/");
+                }}
+              >
                 <Nav>
                   <IconHold>
                     <FaPowerOff />
                   </IconHold>
                   <span>Log Out</span>
                 </Nav>
-              </MainNav>
+              </MainNavOut>
             </NavsCtrl>
           </MobileWrapper>
         </MobileContainer>
@@ -118,7 +128,19 @@ const MobileContainer = styled.div`
 const MobileWrapper = styled.div``;
 
 const NavsCtrl = styled.div``;
-const MainNav = styled.div`
+const MainNav = styled(NavLink)`
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  /* border-top: 1px solid gray; */
+  /* border-bottom: 1px solid gray; */
+
+  cursor: pointer;
+`;
+
+const MainNavOut = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

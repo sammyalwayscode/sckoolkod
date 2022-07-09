@@ -63,14 +63,14 @@ const Desktop = () => {
               <span>Parents</span>
             </Nav>
           </MainNav>
-          <MainNav to="/account">
+          {/* <MainNav to="/account">
             <Nav>
               <IconHold>
                 <MdAccountTree />
               </IconHold>
               <span>Fees</span>
             </Nav>
-          </MainNav>
+          </MainNav> */}
           <MainNav to="/class">
             <Nav>
               <IconHold>
